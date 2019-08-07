@@ -1,0 +1,16 @@
+// CRASH: com.gimranov.zandy.app (pid 9309)
+// Short Msg: java.lang.RuntimeException
+// Long Msg: java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()
+// Build Label: generic_x86/sdk_x86/generic_x86:4.4.2/KK/3462041:eng/test-keys
+// Build Changelist: 3462041
+// Build Time: 1478741905000
+// java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()
+// 	at android.os.Handler.<init>(Handler.java:200)
+// 	at android.os.Handler.<init>(Handler.java:114)
+// 	at android.widget.Toast$TN.<init>(Toast.java:327)
+// 	at android.widget.Toast.<init>(Toast.java:92)
+// 	at android.widget.Toast.makeText(Toast.java:241)
+// 	at com.gimranov.zandy.app.MainActivity.startOAuth(MainActivity.java:176)
+// 	at com.gimranov.zandy.app.MainActivity$1.run(MainActivity.java:140)
+// 	at java.lang.Thread.run(Thread.java:841)
+// 

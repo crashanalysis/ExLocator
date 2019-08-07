@@ -1,0 +1,19 @@
+CrashTester started on Wed Aug 16 16:45:12 SGT 2017
+
+Apk: /DetectorActivity-debug.apk
+
+Exception: java.lang.IllegalStateException: Fragment DetectorTaskFragment{ad33ff98} not attached to Activity
+
+Category: Lifecycle
+
+Description: When doing time-consuming operation in background thread(e.g, AsyncTask), a new Fragment has been created in the meantime, and was detached to the Activity before the AsyncTask finished. The code in UI thread(e.g.,onPostExecute) calls upon a detached Fragment, throwing such exception.
+ 
+
+Fix solution: 
+
+    1: Cancel the background thread when pausing or stopping the Fragment
+
+    2: Use isAdded() to check whether the fragment is attached and then to getResources() from activity.
+
+CrashTester finished on Wed Aug 16 16:45:34 SGT 2017
+CrashTester has run for 0 min 22 sec.

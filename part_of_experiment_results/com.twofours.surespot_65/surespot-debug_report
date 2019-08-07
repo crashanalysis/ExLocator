@@ -1,0 +1,18 @@
+CrashTester started on Wed Aug 16 16:42:57 SGT 2017
+
+Apk: /surespot-debug.apk
+
+Exception: BadTokenException: Unable to add window -- token android.os.BinderProxy@afec0378 is not valid
+
+Category: Lifecycle
+
+Root cause: Activity/Fragment "com.twofours.surespot.ui.MultiProgressDialog$1" started a new thread via "java.lang.Runnable", and try to show a dialog in the new thread when the activity is finished.
+
+Description: The activity has finished but you are trying to display a dialog with a context of the finished activity. Since there is no window for the dialog to display the android runtime throws this exception.
+
+Fix solution: 
+
+    1: Use isFinishing() method which is called by Android to check whether this activity is in the process of finishing: be it explicit finish() call or activity clean up made by Android.
+
+CrashTester finished on Wed Aug 16 16:44:07 SGT 2017
+CrashTester has run for 1 min 10 sec.

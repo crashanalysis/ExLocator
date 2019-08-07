@@ -1,0 +1,7 @@
+ java.lang.IllegalArgumentException: View not attached to window manager
+ 	at android.view.WindowManagerGlobal.findViewLocked(WindowManagerGlobal.java:406)
+ 	at android.view.WindowManagerGlobal.removeView(WindowManagerGlobal.java:308)
+ 	at android.view.WindowManagerImpl.removeView(WindowManagerImpl.java:79)
+ 	at com.vwp.owmap.ScanService.onDestroy(ScanService.java:144)
+ 	at com.vwp.owmap.ScanService.run(ScanService.java:676)
+ 	at java.lang.Thread.run(Thread.java:841)

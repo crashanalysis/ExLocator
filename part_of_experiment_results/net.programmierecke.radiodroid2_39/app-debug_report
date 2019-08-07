@@ -1,0 +1,21 @@
+CrashTester started on Wed Aug 16 16:44:30 SGT 2017
+
+Apk: /app-debug.apk
+
+Exception: java.lang.IllegalStateException: Fragment FragmentTabs{ad2d8a28} not attached to Activity
+
+Category: Lifecycle
+
+Root cause: Class "net.programmierecke.radiodroid2.FragmentTabs$1" starts a new thread via "java.lang.Object" and tries to get resources in Fragment "net.programmierecke.radiodroid2.FragmentTabs$ViewPagerAdapter" from Activity, however, the fragment is detached from the Activity before the background thread finished, throwing such exception.
+
+Description: When doing time-consuming operation in background thread(e.g, AsyncTask), a new Fragment has been created in the meantime, and was detached to the Activity before the AsyncTask finished. The code in UI thread(e.g.,onPostExecute) calls upon a detached Fragment, throwing such exception.
+ 
+
+Fix solution: 
+
+    1: Cancel the background thread when pausing or stopping the Fragment
+
+    2: Use isAdded() to check whether the fragment is attached and then to getResources() from activity.
+
+CrashTester finished on Wed Aug 16 16:45:12 SGT 2017
+CrashTester has run for 0 min 41 sec.

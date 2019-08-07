@@ -1,0 +1,22 @@
+CrashTester started on Wed Aug 16 16:39:55 SGT 2017
+
+Apk: /OWMapAtAndroid-debug.apk
+
+Exception: IllegalArgumentException: View not attached to window manager
+
+Category: Lifecycle
+
+Description: Note either the dialog is showed in Activity (main thread) or background thread, and if its dismiss is called in background thread. IllegalArgumentException may be thrown when the activity is killed while the background is still running.
+
+Fix solution: 
+
+    1: use callback methods provided by Activity: Activity#onCreateDialog(), Activity#showDialog(), Activity#dimissDialog(), Activity#removeDialog() (deprecated since android 4.0)
+
+    2: check whether activity is running: isFinishing() in the thread
+
+    3: dismiss the dialog within the acitvitys lifecycles methods, e.g., onDestroy()
+
+    4: simply use try-catch
+
+CrashTester finished on Wed Aug 16 16:40:18 SGT 2017
+CrashTester has run for 0 min 22 sec.

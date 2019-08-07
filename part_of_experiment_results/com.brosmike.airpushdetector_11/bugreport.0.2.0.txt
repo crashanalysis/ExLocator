@@ -1,0 +1,21 @@
+// CRASH: com.brosmike.airpushdetector (pid 22593)
+// Short Msg: java.lang.IllegalStateException
+// Long Msg: java.lang.IllegalStateException: Fragment DetectorTaskFragment{ad33ff98} not attached to Activity
+// Build Label: generic_x86/sdk_x86/generic_x86:4.3.1/JB_MR2/3462034:eng/test-keys
+// Build Changelist: 3462034
+// Build Time: 1478756115000
+// java.lang.IllegalStateException: Fragment DetectorTaskFragment{ad33ff98} not attached to Activity
+// 	at android.support.v4.app.Fragment.getResources(Fragment.java:571)
+// 	at com.brosmike.airpushdetector.DetectorTaskFragment.onProgressUpdate(DetectorTaskFragment.java:124)
+// 	at com.brosmike.airpushdetector.Detector$DetectAsyncTask.onProgressUpdate(Detector.java:259)
+// 	at com.brosmike.airpushdetector.Detector$DetectAsyncTask.onProgressUpdate(Detector.java:183)
+// 	at android.os.AsyncTask$InternalHandler.handleMessage(AsyncTask.java:647)
+// 	at android.os.Handler.dispatchMessage(Handler.java:99)
+// 	at android.os.Looper.loop(Looper.java:137)
+// 	at android.app.ActivityThread.main(ActivityThread.java:5103)
+// 	at java.lang.reflect.Method.invokeNative(Native Method)
+// 	at java.lang.reflect.Method.invoke(Method.java:525)
+// 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:737)
+// 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:553)
+// 	at dalvik.system.NativeStart.main(Native Method)
+// 

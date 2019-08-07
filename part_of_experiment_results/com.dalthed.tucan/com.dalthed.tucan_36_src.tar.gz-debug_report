@@ -1,0 +1,22 @@
+CrashTester started on Wed Aug 16 16:47:37 SGT 2017
+
+Apk: /com.dalthed.tucan_36_src.tar.gz-debug.apk
+
+Exception: java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare
+
+Category: Android constraint
+
+Root cause: In method "com.dalthed.tucan.TuCanMobileActivity$HTTPSBrowser.doInBackground", it trying to call "android.widget.Toast.makeText" in a background thread -- "android.os.AsyncTask", which has no looper by default, and "android.widget.Toast" will initially make new handler() to handle message, but without a looper.
+
+Description: only the main thread can create object  Looper by default. If other threads directly use new handler() without calling Looper.prepare(), the exception will be thrown. 
+
+Fix solution: 
+
+    1: Excute on UI thread (onPostExecute(), runOnUiThread()),especially for Dialog and Toast.makeText.
+
+    2: New Handler(context.getMainLooper())
+
+    3: Call Looper.prepare() and Looper.loop() before handle message
+
+CrashTester finished on Wed Aug 16 16:48:07 SGT 2017
+CrashTester has run for 0 min 30 sec.

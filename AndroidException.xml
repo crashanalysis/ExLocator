@@ -1,0 +1,53 @@
+<Exceptions>
+<Exception id='1'>
+	<identifier>badtoken_notvalid</identifier>
+	<category>Lifecycle</category>
+	<message>BadTokenException: Unable to add window -- token .* is not valid</message>
+	<description>The activity has finished but you are trying to display a dialog with a context of the finished activity. Since there is no window for the dialog to display the android runtime throws this exception.</description>
+	<solution>Use isFinishing() method which is called by Android to check whether this activity is in the process of finishing: be it explicit finish() call or activity clean up made by Android.</solution>
+</Exception>
+<Exception id='2'>
+	<identifier>argument_viewnotattached</identifier>
+	<category>Lifecycle</category>
+	<message>IllegalArgumentException: View.* not attached to window manager</message>
+	<description>Note either the dialog is showed in Activity (main thread) or background thread, and if its dismiss is called in background thread. IllegalArgumentException may be thrown when the activity is killed while the background is still running.</description>
+	<solution>use callback methods provided by Activity: Activity#onCreateDialog(), Activity#showDialog(), Activity#dimissDialog(), Activity#removeDialog() (deprecated since android 4.0)</solution>
+	<solution>check whether activity is running: isFinishing() in the thread</solution>
+	<solution>dismiss the dialog within the acitvity’s lifecycle’s methods, e.g., onDestroy()</solution>
+ 	<solution>simply use try-catch</solution>
+</Exception>
+<Exception id='3'>
+	<identifier>cursorindexoutofbounds</identifier>
+	<category>Index error</category>
+	<message>android.database.CursorIndexOutOfBoundsException: Index.* requested, with a size of.*</message>
+	<description>When querying database, it may failed, better to check whether the return value is null or not; Besides, the cursor is at index -1 by default, call "MoveToFirst()" before data access and also check if it's empty. \nNote: "null" and "empty" are different. </description>
+	<solution>Use if((cursor != null) and (!cursor.MoveToFirst())) to check.</solution>
+	<solution>Use while(!cursor.MoveToNext()) to iterate when using loop clause.</solution>
+</Exception>
+<Exception id='4'>
+	<identifier>runtimeLooper</identifier>
+	<category>Android constraint</category>
+	<message>java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()</message>
+	<description>only the main thread can create object  Looper by default. If other threads directly use new handler() without calling Looper.prepare(), the exception will be thrown. </description>
+	<solution>Excute on UI thread (onPostExecute(), runOnUiThread()),especially for Dialog and Toast.makeText.</solution>
+	<solution>New Handler(context.getMainLooper())</solution>
+	<solution>Call Looper.prepare() and Looper.loop() before handle message</solution>
+</Exception>
+<Exception id='5'>
+	<identifier>fragmentnotattached</identifier>
+	<category>Lifecycle</category>
+	<message>java.lang.IllegalStateException: Fragment.* not attached to Activity</message>
+	<description>When doing time-consuming operation in background thread(e.g, AsyncTask), a new Fragment has been created in the meantime, and was detached to the Activity before the AsyncTask finished. The code in UI thread(e.g.,onPostExecute) calls upon a detached Fragment, throwing such exception.
+ </description>
+	<solution>Cancel the background thread when pausing or stopping the Fragment</solution>
+	<solution>Use isAdded() to check whether the fragment is attached and then to getResources() from activity.</solution>
+</Exception>
+<Exception id='6'>
+	<identifier>listview</identifier>
+	<category>UI update</category>
+	<message>java.lang.IllegalStateException: The content of the adapter has changed but ListView did not receive a notification. Make sure the content of your adapter is not modified from a background thread, but only from the UI thread. [in ListView.* with Adapter.*]</message>
+	<description>When the content of Adapter changes, call Adapter.notifyDataSetChanged() to notify ListView; The content changes of Adapter and the call of Adapter.notifyDataSetChanged() can only occur in UI thread (i.e., the main thread of the app) instead of the other background threads.
+ </description>
+	<solution>Update data on UI thread (onPostExecute(), runOnUiThread()) and immediately call notifyDataChanged() after the data was changed</solution>
+</Exception>
+</Exceptions>
